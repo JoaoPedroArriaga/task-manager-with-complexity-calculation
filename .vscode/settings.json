@@ -8,6 +8,14 @@
     "java.import.maven.enabled": true,
     "java.autobuild.enabled": true,
     "java.errors.incompleteClasspath.severity": "ignore",
-    "java.jdt.ls.vmargs": "-javaagent:lombok.jar",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.jdt.ls.vmargs": "-javaagent:${workspaceFolder}/lombok.jar",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.server.launchMode": "Standard",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Program Files\\Java\\jdk-21",
+            "default": true
+        }
+    ]
 }
