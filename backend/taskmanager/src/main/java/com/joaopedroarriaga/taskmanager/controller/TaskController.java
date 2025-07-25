@@ -5,16 +5,18 @@ import com.joaopedroarriaga.taskmanager.model.*;
 import com.joaopedroarriaga.taskmanager.service.*;
 import com.joaopedroarriaga.taskmanager.enums.*;
 import jakarta.validation.*;
-import lombok.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tasks")
-@RequiredArgsConstructor
 public class TaskController {
     private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @PostMapping
     public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO) {
@@ -40,13 +42,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskById(id));
     }
 
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<Task> updateTaskStatus(
-            @PathVariable Long id,
-            @RequestParam TaskStatus status) {
-        return ResponseEntity.ok(taskService.updateTaskStatus(id, status));
-    }
-
     @GetMapping("/stats")
     public ResponseEntity<TaskStatsDTO> getTaskStats() {
         long pending = taskService.countTasksByStatus(TaskStatus.PENDING);
@@ -55,5 +50,14 @@ public class TaskController {
         
         TaskStatsDTO stats = new TaskStatsDTO(pending, inProgress, completed);
         return ResponseEntity.ok(stats);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Task> updateTaskStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody StatusUpdateDTO statusUpdate) {
+        
+        Task updatedTask = taskService.updateTaskStatus(id, statusUpdate.getStatus());
+        return ResponseEntity.ok(updatedTask);
     }
 }

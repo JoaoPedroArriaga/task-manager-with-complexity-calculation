@@ -46,7 +46,9 @@ public class TaskService {
     }
 
     public Task updateTaskStatus(Long id, TaskStatus newStatus) {
-        Task task = getTaskById(id);
+        Task task = repository.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+        
         task.setStatus(newStatus);
         return repository.save(task);
     }
