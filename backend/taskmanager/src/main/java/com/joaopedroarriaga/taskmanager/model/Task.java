@@ -2,7 +2,7 @@ package com.joaopedroarriaga.taskmanager.model;
 
 import jakarta.persistence.*;
 import com.joaopedroarriaga.taskmanager.enums.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "tasks")
@@ -21,7 +21,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Builder.Default
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.PENDING;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

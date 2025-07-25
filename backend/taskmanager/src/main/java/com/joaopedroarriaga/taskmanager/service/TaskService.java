@@ -4,7 +4,7 @@ import com.joaopedroarriaga.taskmanager.dto.*;
 import com.joaopedroarriaga.taskmanager.enums.TaskStatus;
 import com.joaopedroarriaga.taskmanager.model.*;
 import com.joaopedroarriaga.taskmanager.repository.*;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 

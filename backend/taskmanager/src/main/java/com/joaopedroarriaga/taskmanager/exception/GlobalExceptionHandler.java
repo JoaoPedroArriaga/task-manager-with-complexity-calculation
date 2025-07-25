@@ -18,6 +18,6 @@ public class GlobalExceptionHandler {
             .findFirst()
             .orElse("Validation error");
 
-        return ResposeEntity.badRequest().body(errorMessage);
+        return ResponseEntity.badRequest().body(errorMessage);
     }
 }
